@@ -42,7 +42,7 @@ public static void main(String args[]) {
 ```
 
 ---
-
+# Outch !
 ```java
 public class Outch {
   private static boolean ready = false; // quit thread when ready
@@ -51,14 +51,14 @@ public class Outch {
   private static class RunningThread extends Thread {
     public void run() {
       while (!ready)
-      Thread.yield(); // give processor to whomever wants it
+        Thread.yield(); // give processor to whomever wants it
       System.out.printf("number is now %d\n", number);
     }
   }
   public static void main(String args[]) {
     (new RunningThread()).start();
     try { Thread.sleep(1); } // wait a (long) while
-  catch (InterruptedException dont_care) { /* for this example doesn't matter */ }
+    catch (InterruptedException dont_care) { /* for this example doesn't matter */ }
     number = 42; // the answer to life, the universe, everything...
     ready = true;
     System.out.printf("main has performed its tasks, quit now.\n");
@@ -80,9 +80,9 @@ Each `acquire()` blocks if necessary until a permit is available. Each `release(
 a permit.
 
 ```java
-// Creates a Semaphore with the given number of permits and nonfair fairness setting.
+// Creates a Semaphore with the given number of permits and nonfair
 Semaphore(int permits)
-// Creates a Semaphore with the given number of permits and the given fairness setting.
+// Creates a Semaphore with the given number of permits and fairness
 Semaphore(int permits, boolean fair)
 ```
 
