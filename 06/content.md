@@ -20,9 +20,9 @@ public class HelloRunnable implements Runnable {
 }
 
 // somewhere else
-  public static void main(String args[]) {
-    (new Thread(new HelloRunnable())).start();
-  }
+public static void main(String args[]) {
+  (new Thread(new HelloRunnable())).start();
+}
 ```
 
 ---
