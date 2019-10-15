@@ -95,7 +95,7 @@ Use a counting semaphore initialized at \(N-1\).
 
 --
 
-The idea is to prevent every philosopher to "seat" at the table in order to eat.
+The idea is to prevent every philosopher to "sit" at the table in order to eat.
 
 ---
 # Points to remember
