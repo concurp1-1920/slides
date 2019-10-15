@@ -74,16 +74,10 @@ package java.util.concurrent;
 public class Semaphore extends Object implements Serializable { /*...*/ }
 ```
 
----
-# Semaphores in Java
-
 A counting semaphore. Conceptually, a semaphore maintains a set of permits.
 
 Each `acquire()` blocks if necessary until a permit is available. Each `release()` add
 a permit.
-
----
-# Semaphores in Java
 
 ```java
 // Creates a Semaphore with the given number of permits and nonfair fairness setting.
