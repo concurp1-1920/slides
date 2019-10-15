@@ -38,6 +38,8 @@ public static void main(String args[]) {
   (new HelloThread()).start();
 }
 ```
+
+---
 # Warning ! Sharing variables without synchronization
 
 ```java
