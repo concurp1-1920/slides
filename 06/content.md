@@ -17,10 +17,12 @@ public class HelloRunnable implements Runnable {
   public void run() {
     System.out.println("Hello from a thread!");
   }
+}
+
+// somewhere else
   public static void main(String args[]) {
     (new Thread(new HelloRunnable())).start();
   }
-}
 ```
 
 ---
@@ -40,7 +42,6 @@ public static void main(String args[]) {
 ```
 
 ---
-# Warning ! Sharing variables without synchronization
 
 ```java
 public class Outch {
@@ -57,10 +58,32 @@ public class Outch {
   public static void main(String args[]) {
     (new RunningThread()).start();
     try { Thread.sleep(1); } // wait a (long) while
-    catch (InterruptedException dont_care) { /* for this example, it doesn't matter */ }
+  catch (InterruptedException dont_care) { /* for this example doesn't matter */ }
     number = 42; // the answer to life, the universe, everything...
     ready = true;
-    System.out.printf("main has performed its tasks, and is now quitting.\n");
+    System.out.printf("main has performed its tasks, quit now.\n");
   }
 }
 ```
+
+---
+# Semaphores in Java
+```java
+package java.util.concurrent;
+
+public class Semaphore extends Object implements Serializable { /*...*/ }
+```
+
+A counting semaphore. Conceptually, a semaphore maintains a set of permits.
+
+Each `acquire()` blocks if necessary until a permit is available. Each `release()` add
+a permit.
+
+```java
+// Creates a Semaphore with the given number of permits and nonfair fairness setting.
+Semaphore(int permits)
+// Creates a Semaphore with the given number of permits and the given fairness setting.
+Semaphore(int permits, boolean fair)
+```
+
+Why unfair ?
