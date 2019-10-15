@@ -43,27 +43,21 @@ public static void main(String args[]) {
 # Warning ! Sharing variables without synchronization
 
 ```java
-public class ouch {
+public class Outch {
   private static boolean ready = false; // quit thread when ready
   private static int number = 0; // print the resulting number when ready
   // a simple class to run an equally simple thread
   private static class RunningThread extends Thread {
-    // simply loop until main class decides it is ready
     public void run() {
       while (!ready)
       Thread.yield(); // give processor to whomever wants it
       System.out.printf("number is now %d\n", number);
     }
   }
-  // just running a thread, so no arguments
   public static void main(String args[]) {
     (new RunningThread()).start();
-    try {
-      Thread.sleep(1);
-    } // wait a (long) while
-    catch (InterruptedException dont_care) {
-      /* for this example, it doesn't matter */
-    }
+    try { Thread.sleep(1); } // wait a (long) while
+    catch (InterruptedException dont_care) { /* for this example, it doesn't matter */ }
     number = 42; // the answer to life, the universe, everything...
     ready = true;
     System.out.printf("main has performed its tasks, and is now quitting.\n");
