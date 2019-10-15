@@ -87,9 +87,18 @@ process Philosopher ( (int id = 0; id < N; id++) ) {
 ---
 # Again another solution...
 
-  Limit the number of philosophers who are allowed to eat at a given time.
-  How to do that ?
+Limit the number of philosophers who are allowed to eat at a given time. How to do that ?
 
 --
 
 Use a counting semaphore initialized at \(N-1\).
+
+--
+
+The idea is to prevent every philosopher to "seat" at the table in order to eat.
+
+---
+# Points to remember
+
+* For any solution, there must be the same number of \(P\) and \(V\) operations.
+* It is the implementation of the semaphores that will guarantee that a philosopher wil not starve.
