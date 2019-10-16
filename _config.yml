@@ -4,5 +4,4 @@ baseurl: "/slides"
 url: "http://concurp1-1920.github.io"
 github_username:  concurp1-1920
 markdown: kramdown
-
 theme: jekyll-theme-cayman
