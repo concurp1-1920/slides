@@ -61,17 +61,20 @@ Easy to do simple things asynchronously.
 
 ```java
 int res;
-void main(void) {
-  res = 1;
-  int max = 10;
-  for (int i = 1; i <= max; i++) {
-    res *= i;
-  }
-  int a = res;
+int main(void) {
+    res = 1;
+    int max = 10;
+    for (int i = 1; i <= max; i++) {
+        res *= i;
+    }
+    int a = res;
+    return 1;
 }
 ```
 ---
 # Volatile
+
+When compiling with -O0
 
 ```
 >>> gcc -O0 main.c
@@ -104,6 +107,8 @@ void main(void) {
 ---
 # Volatile
 
+When compiling with -O3
+
 ```
 >>> gcc -O3 main.c
 >>> objdump -d a.out
@@ -114,8 +119,6 @@ void main(void) {
     1047:       5f 37 00
     104a:       c3                      retq   
     104b:       0f 1f 44 00 00          nopl   0x0(%rax,%rax,1)
-
-
 
 
 
@@ -140,6 +143,9 @@ void main(void) {
 ```
 ---
 # Volatile
+
+When using the `volatile` keyword, the compiler is not allowed to optimise the variable.
+
 ```
 0000000000001040 <main>:
 movl   $0x1,0x2fca(%rip)        # 4014 <res>
@@ -164,24 +170,145 @@ nopl   (%rax)
 ```
 
 ---
+# Synchronization in Java
+
+```java
+public class Account {
+
+  private volatile int total = 0;
+
+  public void withdraw(int amount) { total -= amount; }
+
+  public void deposit(int amount) { total += amount; }
+
+  public int money() { return total; }
+}
+```
+
+---
+
+```java
+public class Main {
+
+  private static final int NB_THREAD = 10;
+  private static final int NB_ITR_THREAD = 1000;
+
+  public static void main(String[] args) {
+
+    Bank account = new Account();
+    CyclicBarrier finish = new CyclicBarrier(NB_THREAD + 1);
+
+    for (int pid = 0; pid < NB_THREAD; pid++) { (new Thread(() -> {
+      for (int j = 0; j < NB_ITR_THREAD; j++) {
+        account.deposit(50);
+        account.withdraw(25);
+        account.deposit(25);
+        account.withdraw(50);
+      }
+
+      finish.await(); // missing try/catch
+    })).start();
+  }
+
+  finish.await(); // missing try/catch
+  System.out.println("Account amount : " + account.money());
+}
+}
+```
+
+---
+# Synchronized
+
+There is no Synchronization, how to solve this problem ?
+
+```
+$> java Main
+Bank amount : 3300
+
+$> java Main
+Bank amount : 0
+
+$> java Main
+Bank amount : 31900
+
+$> java Main
+Bank amount : 675
+```
+
+---
 # Synchronized
 
 Synchronized blocks are a way to mutually exclude the execution of specific blocks of code.
 
 ```java
-public class Bank {
+public class Account {
 
   private volatile int total = 0;
 
-  public void withdraw(int amount) { /* Code */}
+  public synchronized void withdraw(int amount) {
+    total -= amount;
+  }
 
-  public void deposit(int amount) { /* Code */}
+  public synchronized void deposit(int amount) {
+    total += amount;
+  }
 
+  public int money() { return total; }
+}
+```
+---
+# Double Account
+
+```java
+public class DoubleAccount {
+
+  private volatile int total1 = 0;
+  private volatile int total2 = 0;
+
+  public synchronized void withdraw1(int amount) {
+    total1 -= amount;
+  }
+  public synchronized void deposit1(int amount) {
+    total1 += amount;
+  }
+
+  public synchronized void withdraw2(int amount) {
+    total2 -= amount;
+  }
+  public synchronized void deposit2(int amount) {
+    total2 += amount;
+  }
+
+  public int totalMoney() { return total1 + total2; }
+}
+```
+
+---
+# Objects as synchronized locks
+
+This way, `lock1` and `lock2` are not mutually exclude.
+
+```java
+private final Object lock1 = new Object();
+private final Object lock2 = new Object();
+
+public void withdraw1(int amount) {
+  synchronized (lock1) {
+    total1 -= amount;
+  }
+}
+
+public void withdraw2(int amount) {
+  synchronized (lock2) {
+    total2 -= amount;
+  }
 }
 ```
 
 ---
 # Atomic Objects
+
+
 
 ---
 # Locks
