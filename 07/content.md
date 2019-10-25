@@ -197,22 +197,23 @@ public class Main {
 
     Bank account = new Account();
     CyclicBarrier finish = new CyclicBarrier(NB_THREAD + 1);
+    
+    for (int pid = 0; pid < NB_THREAD; pid++) {
+      (new Thread(() -> {
+        for (int j = 0; j < NB_ITR_THREAD; j++) {
+          account.deposit(50);
+          account.withdraw(25);
+          account.deposit(25);
+          account.withdraw(50);
+        }
 
-    for (int pid = 0; pid < NB_THREAD; pid++) { (new Thread(() -> {
-      for (int j = 0; j < NB_ITR_THREAD; j++) {
-        account.deposit(50);
-        account.withdraw(25);
-        account.deposit(25);
-        account.withdraw(50);
-      }
+        finish.await(); // missing try/catch
+      })).start();
+    }
 
-      finish.await(); // missing try/catch
-    })).start();
+    finish.await(); // missing try/catch
+    System.out.println("Account amount : " + account.money());
   }
-
-  finish.await(); // missing try/catch
-  System.out.println("Account amount : " + account.money());
-}
 }
 ```
 
