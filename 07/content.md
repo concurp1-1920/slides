@@ -62,13 +62,13 @@ Easy to do simple things asynchronously.
 ```java
 int res;
 int main(void) {
-    res = 1;
-    int max = 10;
-    for (int i = 1; i <= max; i++) {
-        res *= i;
-    }
-    int a = res;
-    return 1;
+  res = 1;
+  int max = 10;
+  for (int i = 1; i <= max; i++) {
+    res *= i;
+  }
+  int a = res;
+  return 1;
 }
 ```
 ---
@@ -81,26 +81,26 @@ When compiling with -O0
 >>> objdump -d a.out
 
 0000000000001125 <main>:
-    1125:  55                    push   %rbp
-    1126:  48 89 e5              mov    %rsp,%rbp
-    1129:  c7 05 e1 2e 00 00 01  movl   $0x1,0x2ee1(%rip)   # 4014 <res>
-    1130:  00 00 00
-    1133:  c7 45 f8 0a 00 00 00  movl   $0xa,-0x8(%rbp)
-    113a:  c7 45 f4 01 00 00 00  movl   $0x1,-0xc(%rbp)
-    1141:  eb 14                 jmp    1157 <main+0x32>
-    1143:  8b 05 cb 2e 00 00     mov    0x2ecb(%rip),%eax   # 4014 <res>
-    1149:  0f af 45 f4           imul   -0xc(%rbp),%eax
-    114d:  89 05 c1 2e 00 00     mov    %eax,0x2ec1(%rip)   # 4014 <res>
-    1153:  83 45 f4 01           addl   $0x1,-0xc(%rbp)
-    1157:  8b 45 f4              mov    -0xc(%rbp),%eax
-    115a:  3b 45 f8              cmp    -0x8(%rbp),%eax
-    115d:  7e e4                 jle    1143 <main+0x1e>
-    115f:  8b 05 af 2e 00 00     mov    0x2eaf(%rip),%eax   # 4014 <res>
-    1165:  89 45 fc              mov    %eax,-0x4(%rbp)
-    1168:  90                    nop
-    1169:  5d                    pop    %rbp
-    116a:  c3                    retq   
-    116b:  0f 1f 44 00 00        nopl   0x0(%rax,%rax,1)
+1125:  55                    push   %rbp
+1126:  48 89 e5              mov    %rsp,%rbp
+1129:  c7 05 e1 2e 00 00 01  movl   $0x1,0x2ee1(%rip)   # 4014 <res>
+1130:  00 00 00
+1133:  c7 45 f8 0a 00 00 00  movl   $0xa,-0x8(%rbp)
+113a:  c7 45 f4 01 00 00 00  movl   $0x1,-0xc(%rbp)
+1141:  eb 14                 jmp    1157 <main+0x32>
+1143:  8b 05 cb 2e 00 00     mov    0x2ecb(%rip),%eax   # 4014 <res>
+1149:  0f af 45 f4           imul   -0xc(%rbp),%eax
+114d:  89 05 c1 2e 00 00     mov    %eax,0x2ec1(%rip)   # 4014 <res>
+1153:  83 45 f4 01           addl   $0x1,-0xc(%rbp)
+1157:  8b 45 f4              mov    -0xc(%rbp),%eax
+115a:  3b 45 f8              cmp    -0x8(%rbp),%eax
+115d:  7e e4                 jle    1143 <main+0x1e>
+115f:  8b 05 af 2e 00 00     mov    0x2eaf(%rip),%eax   # 4014 <res>
+1165:  89 45 fc              mov    %eax,-0x4(%rbp)
+1168:  90                    nop
+1169:  5d                    pop    %rbp
+116a:  c3                    retq   
+116b:  0f 1f 44 00 00        nopl   0x0(%rax,%rax,1)
 ```
 
 
@@ -115,10 +115,10 @@ When compiling with -O3
 
 
 0000000000001040 <main>:
-    1040:       c7 05 ca 2f 00 00 00    movl   $0x375f00,0x2fca(%rip)        # 4014 <res>
-    1047:       5f 37 00
-    104a:       c3                      retq   
-    104b:       0f 1f 44 00 00          nopl   0x0(%rax,%rax,1)
+1040:       c7 05 ca 2f 00 00 00    movl   $0x375f00,0x2fca(%rip)        # 4014 <res>
+1047:       5f 37 00
+104a:       c3                      retq   
+104b:       0f 1f 44 00 00          nopl   0x0(%rax,%rax,1)
 
 
 
@@ -308,10 +308,244 @@ public void withdraw2(int amount) {
 ---
 # Atomic Objects
 
+How to write a concurrent counter in Java ?
 
+Assume we have the following interface :
+
+```java
+public interface Counter {
+
+  public void increment();
+
+  public int value();
+}
+```
+
+---
+# Atomic Objects
+
+The first stupid idea :
+
+```java
+public class CounterNoSync implements Counter {
+
+  private volatile int counter = 0;
+
+  public void increment() {
+    counter = counter + 1;
+  }
+
+  public int value() {
+    return counter;
+  }
+}
+```
+
+---
+# Atomic Objects
+
+We can use `synchronized` !
+
+```java
+public class CounterSync implements Counter {
+
+  private volatile int counter = 0;
+
+  public synchronized void increment() {
+    counter = counter + 1;
+  }
+
+  public int value() {
+    return counter;
+  }
+}
+```
+
+--
+
+But now we got a problem...
+
+---
+# Performance issues
+
+```
+value : 63595012 / 64000000 	 time : 2013 ms
+value : 53813842 / 64000000 	 time : 832 ms
+value : 51102086 / 64000000 	 time : 760 ms
+value : 51406409 / 64000000 	 time : 796 ms
+value : 49034237 / 64000000 	 time : 1053 ms
+value : 47219959 / 64000000 	 time : 1228 ms
+value : 49466383 / 64000000 	 time : 1156 ms
+value : 52893672 / 64000000 	 time : 922 ms
+value : 53625022 / 64000000 	 time : 776 ms
+value : 51758695 / 64000000 	 time : 766 ms
+Average : 922.5
+
+value : 64000000 / 64000000 	 time : 1234 ms
+value : 64000000 / 64000000 	 time : 1311 ms
+value : 64000000 / 64000000 	 time : 1483 ms
+value : 64000000 / 64000000 	 time : 1503 ms
+value : 64000000 / 64000000 	 time : 1768 ms
+value : 64000000 / 64000000 	 time : 1590 ms
+value : 64000000 / 64000000 	 time : 1262 ms
+value : 64000000 / 64000000 	 time : 1417 ms
+value : 64000000 / 64000000 	 time : 1199 ms
+value : 64000000 / 64000000 	 time : 1258 ms
+Average : 1372.3333333333333
+```
+
+---
+# Performance issues
+
+When multiple threads attempt to acquire a lock, one of them wins,
+while the rest of the threads are either blocked or suspended.
+
+**The process of suspending and then resuming a thread is very expensive**
+and affects the overall efficiency of the system.
+
+.center[<img src="img/sloth.jpeg" width="300"/>]
+
+But we can do better...
+
+---
+# Atomic Objects
+
+In Java, we can use what we call **Atomic Objects** :
+
+- AtomicInteger
+- AtomicBoolean
+- AtomicLong
+- AtomicReference
+
+witht the following operations :
+
+- `get()` : gets the value from the memory.
+- `set()` : writes the value from the memory.
+- `compareAndSet()` : same as `compareAndSwap()`, as seen before.
+- various method depending on the type, such as `incrementAndGet()`, ...
+
+---
+# Atomic Objects
+
+```java
+public class CounterAtomic implements Counter {
+
+  private final AtomicInteger counter = new AtomicInteger(0);
+
+  public void increment() {
+    counter.incrementAndGet();
+  }
+
+  public int value() {
+    return counter.get();
+  }
+}
+```
+
+Performace are much better !
+
+---
+# Atomic Objects
+
+```
+value : 64000000 / 64000000 	 time : 1234 ms
+value : 64000000 / 64000000 	 time : 1311 ms
+value : 64000000 / 64000000 	 time : 1483 ms
+value : 64000000 / 64000000 	 time : 1503 ms
+value : 64000000 / 64000000 	 time : 1768 ms
+value : 64000000 / 64000000 	 time : 1590 ms
+value : 64000000 / 64000000 	 time : 1262 ms
+value : 64000000 / 64000000 	 time : 1417 ms
+value : 64000000 / 64000000 	 time : 1199 ms
+value : 64000000 / 64000000 	 time : 1258 ms
+Average : 1372.3333333333333
+
+value : 64000000 / 64000000 	 time : 795 ms
+value : 64000000 / 64000000 	 time : 1344 ms
+value : 64000000 / 64000000 	 time : 904 ms
+value : 64000000 / 64000000 	 time : 780 ms
+value : 64000000 / 64000000 	 time : 833 ms
+value : 64000000 / 64000000 	 time : 818 ms
+value : 64000000 / 64000000 	 time : 1127 ms
+value : 64000000 / 64000000 	 time : 916 ms
+value : 64000000 / 64000000 	 time : 945 ms
+value : 64000000 / 64000000 	 time : 969 ms
+Average : 897.5
+```
 
 ---
 # Locks
 
+```java
+public class CounterLock implements Counter {
+
+  private volatile int counter = 0;
+  private ReentrantLock lock = new ReentrantLock();
+
+  public void increment() {
+    lock.lock();
+    try {
+      counter++;
+    } finally {
+      lock.unlock();
+    }
+  }
+
+  public int value() {
+    return counter;
+  }
+}
+```
+
 ---
-# In class exercise
+# ReentrantLock
+
+There exists various method for `ReentrantLock` :
+
+- `lock()` and `unlock()`
+- `tryLock()` returning a boolean, with or without a timeout.
+
+Useful, depending the use case.
+
+```java
+boolean locked = lock.tryLock(); // no pause
+System.out.println("Lock acquired: " + locked);
+```
+
+```java
+boolean locked = lock.tryLock(1, TimeUnit.SECONDS);
+System.out.println("Lock acquired after timeout: " + locked);
+```
+
+*Reentrant* means that the thread who holds the lock is allowed to lock it again. Thus,
+a ressource counter is used, and the lock is released only when the same number of `lock()` and `unlock()` is done.
+
+---
+# ReadWriteLock
+
+The interface ReadWriteLock specifies another type of lock maintaining
+a pair of locks for read and write access.
+
+```java
+class Writer extends Thread {
+  public void run() {
+    while (true) {
+      // Non CS
+      lock.writeLock().lock();
+      // CS
+      lock.writeLock().unlock();
+    }
+  }
+}
+
+class Reader extends Thread {
+  public void run() {
+    while (true) {
+      // Non CS
+      lock.readLock().lock();
+      // CS
+      lock.readLock().unlock();
+    }
+  }
+}
+```
