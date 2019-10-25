@@ -197,7 +197,7 @@ public class Main {
 
     Bank account = new Account();
     CyclicBarrier finish = new CyclicBarrier(NB_THREAD + 1);
-    
+
     for (int pid = 0; pid < NB_THREAD; pid++) {
       (new Thread(() -> {
         for (int j = 0; j < NB_ITR_THREAD; j++) {
@@ -367,7 +367,7 @@ public class CounterSync implements Counter {
 But now we got a problem...
 
 ---
-# Performance issues
+# Performances issues
 
 ```
 value : 63595012 / 64000000 	 time : 2013 ms
@@ -396,7 +396,7 @@ Average : 1372.3333333333333
 ```
 
 ---
-# Performance issues
+# Performances issues
 
 When multiple threads attempt to acquire a lock, one of them wins,
 while the rest of the threads are either blocked or suspended.
@@ -443,7 +443,7 @@ public class CounterAtomic implements Counter {
 }
 ```
 
-Performace are much better !
+Performances are much better !
 
 ---
 # Atomic Objects
