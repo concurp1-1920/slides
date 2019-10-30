@@ -3,6 +3,12 @@
 ### Concurrent programming 1 - Lecture 6
 
 .center[<img src="img/java.png" width="350"/>]
+
+---
+class: center, middle
+
+<span style="font-size : 50px">concurp1-1920.github.io</span>
+
 ---
 # Java Threads
 
