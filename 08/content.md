@@ -180,8 +180,8 @@ The wait and signal operations on condition variables are similar to the P and V
 wait, like P, delays a process, and signal, like V, awakens a process. However, there are important
 differences:
 
-1. signal has no effect if there is no process delayed on the condition variable.
-2. wait always delays, even if there were prior signals.
+1. `signal` has no effect if there is no process delayed on the condition variable.
+2. `wait` always delays, even if there were prior signals.
 
 ---
 # Bounded buffer
