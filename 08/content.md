@@ -127,7 +127,7 @@ Java and Mesa say that there is no reason to block the process that signals, so
 it should continue. This is called Signal and Continue (SC).
 
 .center[<img src="img/SC.jpg" height="350">]
-[Wiki](https://en.wikipedia.org/wiki/Monitor_(synchronization)#/media/File:Monitor_(synchronization)-Mesa.png)
+[Wiki]("https://en.wikipedia.org/wiki/Monitor_(synchronization)#/media/File:Monitor_(synchronization)-Mesa.png")
 
 To do it in JR :
 ```
@@ -155,7 +155,7 @@ should continue as soon as the awakened process either exits the monitor or wait
 Signal and Urgent Wait (SU).
 
 .center[<img src="img/SU.jpg" height="327">]
-[Wiki](https://en.wikipedia.org/wiki/Monitor_(synchronization)#/media/File:Monitor_(synchronization)-SU.png)
+[Wiki]("https://en.wikipedia.org/wiki/Monitor_(synchronization)#/media/File:Monitor_(synchronization)-SU.png")
 
 To do it in JR :
 ```
