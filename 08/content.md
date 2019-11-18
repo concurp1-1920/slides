@@ -126,8 +126,8 @@ Different languages, monitors and environments offer different possibilities.
 Java and Mesa say that there is no reason to block the process that signals, so
 it should continue. This is called Signal and Continue (SC).
 
-.left[<img src="img/SC.jpg" height="350">]
-.right[<img src="img/SC-wiki.png" height="200">]
+.center[<img src="img/SC.jpg" height="350">]
+![Wiki]("https://en.wikipedia.org/wiki/Monitor_(synchronization)#/media/File:Monitor_(synchronization)-Mesa.png")
 
 To do it in JR :
 ```
@@ -140,7 +140,7 @@ To do it in JR :
 Concurrent Euclid and Modula say that the process that was waiting on a condition variable is the one
 that gets access to the monitor. This is called Signal and Wait (SW).
 
-.left[<img src="img/SW.jpg" height="350">]
+.center[<img src="img/SW.jpg" height="350">]
 
 To do it in JR :
 ```
@@ -155,7 +155,7 @@ should continue as soon as the awakened process either exits the monitor or wait
 Signal and Urgent Wait (SU).
 
 .center[<img src="img/SU.jpg" height="327">]
-.right[<img src="img/SU-wiki.png" height="200">]
+![Wiki]("https://en.wikipedia.org/wiki/Monitor_(synchronization)#/media/File:Monitor_(synchronization)-SU.png")
 
 To do it in JR :
 ```
