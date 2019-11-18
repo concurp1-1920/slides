@@ -126,8 +126,8 @@ Different languages, monitors and environments offer different possibilities.
 Java and Mesa say that there is no reason to block the process that signals, so
 it should continue. This is called Signal and Continue (SC).
 
-.center[<img src="img/SC.jpg" height="350">]
-.center[<img src="img/SC-wiki.png" height="150">]
+.left[<img src="img/SC.jpg" height="350">]
+.right[<img src="img/SC-wiki.png" height="200">]
 
 To do it in JR :
 ```
@@ -140,8 +140,8 @@ To do it in JR :
 Concurrent Euclid and Modula say that the process that was waiting on a condition variable is the one
 that gets access to the monitor. This is called Signal and Wait (SW).
 
-.center[<img src="img/SW.jpg" height="350">]
-.center[<img src="img/SW-wiki.png" height="150">]
+.left[<img src="img/SW.jpg" height="350">]
+.right[<img src="img/SW-wiki.png" height="200">]
 
 To do it in JR :
 ```
