@@ -82,6 +82,7 @@ condition c;
 Wait on a condition :
 ```java
 wait(c); // always block if the condition is false
+         // places the process at the END of c's delay queue
 ```
 
 ---
