@@ -229,7 +229,7 @@ int fetch() {
   count--;
 
   signal(not_full);
-  return o;
+  return 0;
 }
 ```
 
