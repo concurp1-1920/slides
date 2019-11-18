@@ -227,12 +227,12 @@ int fetch() {
 
   while(count == 0) wait(not_empty);
 
-  int o = buf[front];
+  int element = buf[front];
   front = ++front % N;
   count--;
 
   signal(not_full);
-  return 0;
+  return element;
 }
 ```
 
