@@ -82,7 +82,7 @@ condition c;
 Wait on a condition :
 ```java
 wait(c); // always block if the condition is false
-         // places the process at the END of c's delay queue
+         // places the process at the **END** of c's delay queue
 ```
 
 ---
@@ -97,7 +97,7 @@ monitor so waiting Threads can continue.
 
 Signal waiting process that the state has change :
 ```java
-signal(c);
+signal(c); // release the process at the **FRONT** of the delay queue
 ```
 
 If `c`'s queue is not empty, this will release the process at the front of the
