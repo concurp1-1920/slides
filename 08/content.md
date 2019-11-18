@@ -82,7 +82,7 @@ condition c;
 Wait on a condition :
 ```java
 wait(c); // always block if the condition is false
-         // places the process at the **END** of c's delay queue
+         // places the process at the END of c's delay queue
 ```
 
 ---
@@ -97,7 +97,7 @@ monitor so waiting Threads can continue.
 
 Signal waiting process that the state has change :
 ```java
-signal(c); // release the process at the **FRONT** of the delay queue
+signal(c); // release the process at the FRONT of the delay queue
 ```
 
 If `c`'s queue is not empty, this will release the process at the front of the
@@ -310,7 +310,7 @@ Transform the monitor into a JR class (with signal and wait):
 m2jr -sw BB.jr
 ```
 
-Use it as a standard Java class:
+Use it as a standard Java class in JR:
 
 ```java
 public class BBMain {
