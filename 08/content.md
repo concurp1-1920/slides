@@ -139,7 +139,8 @@ To do it in JR :
 Concurrent Euclid and Modula say that the process that was waiting on a condition variable is the one
 that gets access to the monitor. This is called Signal and Wait (SW).
 
-.center[<img src="img/SW.jpg" height="350">]
+.left[<img src="img/SW.jpg" height="350">]
+.right[<img src="img/SW-wiki.png" height="150">]
 
 To do it in JR :
 ```
