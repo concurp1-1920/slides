@@ -141,7 +141,6 @@ Concurrent Euclid and Modula say that the process that was waiting on a conditio
 that gets access to the monitor. This is called Signal and Wait (SW).
 
 .left[<img src="img/SW.jpg" height="350">]
-.right[<img src="img/SW-wiki.png" height="200">]
 
 To do it in JR :
 ```
@@ -156,6 +155,7 @@ should continue as soon as the awakened process either exits the monitor or wait
 Signal and Urgent Wait (SU).
 
 .center[<img src="img/SU.jpg" height="327">]
+.right[<img src="img/SU-wiki.png" height="200">]
 
 To do it in JR :
 ```
