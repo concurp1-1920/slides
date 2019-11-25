@@ -131,7 +131,7 @@ it should continue. This is called Signal and Continue (SC).
 
 To do it in JR :
 ```
-> m2jr -sc monitor.jr
+> m2jr -sc monitor.m
 ```
 
 ---
@@ -144,7 +144,7 @@ that gets access to the monitor. This is called Signal and Wait (SW).
 
 To do it in JR :
 ```
-> m2jr -sw monitor.jr
+> m2jr -sw monitor.m
 ```
 
 ---
@@ -159,7 +159,7 @@ Signal and Urgent Wait (SU).
 
 To do it in JR :
 ```
-> m2jr -su monitor.jr
+> m2jr -su monitor.m
 ```
 
 ---
@@ -172,7 +172,7 @@ Signal and eXit (SX).
 
 To do it in JR :
 ```
-> m2jr -sx monitor.jr
+> m2jr -sx monitor.m
 ```
 
 ---
