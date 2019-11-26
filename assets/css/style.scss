@@ -1,0 +1,28 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.highlight {
+  background-color: #ffffff;
+}
+
+.leftCol {
+  width:45%;
+  float: left;
+  margin: 0% 5% 0% 0%;
+}
+
+.rightCol {
+  width:45%;
+  float: left;
+  margin: 0% 0% 0% 5%;
+}
+
+.cli {
+  background-color: #ffffff;
+  font-size: 15pt;
+  font-style: normal;
+  font-weight: bold;
+  color: #000000;
+}
