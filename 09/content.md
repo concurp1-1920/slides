@@ -68,7 +68,7 @@ Typically in environments that support Signal and Continue semantics, there is a
 signal_all(c);
 ```
 
-Each awakened processes continues execution in the monitor at some future time.  Of course, mutual exclusion is still guaranteed by the monitor.  The effect of signal_all is the same as
+Each awakened processes continues execution in the monitor at some future time.  Of course, mutual exclusion is still guaranteed by the monitor.  The effect of `signal_all` is the same as
 
 ```java
 while (! empty(c)) signal(c);
@@ -78,6 +78,7 @@ while (! empty(c)) signal(c);
 # Example
 
 Here is an example where we implement a timer monitor.  This is a utility that is often provided in operating systems to enable users to to do such things as periodically execute commands.
+
 Our monitor has two operations, delay(interval) that processes call to wait interval time units.  Another operation will be tick(), which we will assume is called by a process that is periodically awakened by a hardware timer.  There could be other operations defined as well, for example to return the current time.
 
 ---
@@ -103,7 +104,7 @@ monitor timer {
 ---
 # Example
 
-We see a sample usage of signal_all, which forces each process to wake up, and check to see if it is time to continue, or go back to sleep.  Of course in this particular case, this not very efficient, especially if processes are calling delay to wait for long periods of time.
+We see a sample usage of `signal_all`, which forces each process to wake up, and check to see if it is time to continue, or go back to sleep.  Of course in this particular case, this not very efficient, especially if processes are calling delay to wait for long periods of time.
 
 By using priority wait, however, we can transform this solution into one that is equally simple, yet efficient.  Essentially, we don't need to wake up each process every time, and we don't want to wake them up in the order in which they arrive.
 
@@ -151,10 +152,10 @@ int nc = 0;      // Number of processes waiting on Condition
 int nu = 0;      // Number waiting on Urgent q, SU only
 ```
 
-- Signal and Continue
-- Signal and Wait
-- Signal and Urgent Wait
-- Signal and Exit
+* Signal and Continue
+* Signal and Wait
+* Signal and Urgent Wait
+* Signal and Exit
 
 - Monitor entry
 - Monitor exit
