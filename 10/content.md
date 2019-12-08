@@ -33,7 +33,7 @@ public class Bank {
 }
 ```
 ---
-# Bank in JR
+# Bank monitor in JR
 
 ```java
 
@@ -58,7 +58,7 @@ _monitor Bank {
 }
 ```
 ---
-# Bank in Java
+# Bank monitor in Java
 
 ```java
 public class Bank {
@@ -88,6 +88,8 @@ public class Bank {
 - `notify()` only wake up one process (<span style="color:red;">randomly</span>), be careful !
 - `notifyAll()` wake up all processes.
 - `wait()` always pauses the thread, even if prior `notify` happens.
+
+
 - Java only offer the **Signal and Continue** `SC` semantics.
 
 --
@@ -198,7 +200,25 @@ Now it is our turn to do it !
 
 ```java
 public class BarberShop {
-  final Lock lock = new ReentrantLock(true);
+   final Lock lock = new ReentrantLock(true);
+
+  //...
+}
+```
+
+--
+```java
+public class BarberShop {  
+   final Lock lock = new ReentrantLock(true);
+   final Condition bAvail = lock.newCondition();      // signaled when barber > 0
+   final Condition chOccupied = lock.newCondition();  // signaled when chair > 0
+   final Condition dOpen = lock.newCondition();       // signaled when open > 0
+   final Condition cuLeft = lock.newCondition();      // signaled when open = 0
+
+   int barber = 0,    // incremented by barber when he's ready
+       chair = 0,     // incremented by customer when sitting in chair
+       open = 0;      // incremented by barber, decremented by cust. when leaving
+
 
   //...
 }
