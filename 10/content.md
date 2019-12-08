@@ -196,7 +196,7 @@ Each customer, when they arrive, looks to see what the barber is doing. If the b
 Now it is our turn to do it !
 
 ---
-# Sleeping Barber problem in Java
+# Sleeping Barber problem in Java (some hints)
 
 ```java
 public class BarberShop {
@@ -206,7 +206,9 @@ public class BarberShop {
 }
 ```
 
---
+---
+# Sleeping Barber problem in Java (some more hints)
+
 ```java
 public class BarberShop {  
    final Lock lock = new ReentrantLock(true);
@@ -221,5 +223,41 @@ public class BarberShop {
 
 
   //...
+}
+```
+
+---
+# Sleeping Barber problem in Java (even some more hints)
+
+```java
+public class BarberShop {  
+   final Lock lock = new ReentrantLock(true);
+   final Condition bAvail = lock.newCondition();      // signaled when barber > 0
+   final Condition chOccupied = lock.newCondition();  // signaled when chair > 0
+   final Condition dOpen = lock.newCondition();       // signaled when open > 0
+   final Condition cuLeft = lock.newCondition();      // signaled when open = 0
+
+   int barber = 0,    // incremented by barber when he's ready
+       chair = 0,     // incremented by customer when sitting in chair
+       open = 0;      // incremented by barber, decremented by cust. when leaving
+
+
+   // called by customers
+   public void getHaircut() { 
+      lock.lock();
+      ....
+   }
+
+   // called by the barber
+   public void getNextCustomer() {
+      lock.lock();
+      ...
+   }
+    
+   // called by the barber
+   public void finishedCut() {
+      lock.lock();
+      ...
+   }
 }
 ```
