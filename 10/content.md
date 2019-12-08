@@ -196,7 +196,7 @@ Each customer, when they arrive, looks to see what the barber is doing. If the b
 Now it is our turn to do it !
 
 ---
-# Sleeping Barber problem in Java (some hints)
+### Sleeping Barber problem in Java (some hints)
 
 ```java
 public class BarberShop {
@@ -207,7 +207,7 @@ public class BarberShop {
 ```
 
 ---
-# Sleeping Barber problem in Java (some more hints)
+### Sleeping Barber Java
 
 ```java
 public class BarberShop {  
@@ -231,7 +231,7 @@ public class BarberShop {
 ```
 
 ---
-# Sleeping Barber problem in Java (even some more hints)
+### Sleeping Barber Java
 
 * Barber process
 * Client processes
@@ -239,7 +239,7 @@ public class BarberShop {
 .center[<img src="img/barber-processes.png" width="550">]
 
 ---
-# Sleeping Barber problem in Java (even some more hints)
+### Sleeping Barber Java
 
 ```java
 public class BarberShop {  
