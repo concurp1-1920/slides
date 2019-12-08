@@ -212,10 +212,14 @@ public class BarberShop {
 ```java
 public class BarberShop {  
    final Lock lock = new ReentrantLock(true);
-   final Condition bAvail = lock.newCondition();      // sig when barber > 0
-   final Condition chOccupied = lock.newCondition();  // sig when chair > 0
-   final Condition dOpen = lock.newCondition();       // sig when open > 0
-   final Condition cuLeft = lock.newCondition();      // sig when open = 0
+   final Condition bAvail = lock.newCondition();      
+        // signaled when barber > 0
+   final Condition chOccupied = lock.newCondition();  
+        // signaled when chair > 0
+   final Condition dOpen = lock.newCondition();       
+        // signaled when open > 0
+   final Condition cuLeft = lock.newCondition();     
+        // signaled when open = 0
 
    int barber = 0,    // inc by barber when he's ready
        chair = 0,     // inc by customer when sitting in chair
@@ -229,31 +233,36 @@ public class BarberShop {
 ---
 # Sleeping Barber problem in Java (even some more hints)
 
+* Barber process
+* Client processes
+
+.center[<img src="img/barber-processes.png" width="550">]
+
+---
+# Sleeping Barber problem in Java (even some more hints)
+
 ```java
 public class BarberShop {  
    final Lock lock = new ReentrantLock(true);
-   final Condition bAvail = lock.newCondition();      // signaled when barber > 0
-   final Condition chOccupied = lock.newCondition();  // signaled when chair > 0
-   final Condition dOpen = lock.newCondition();       // signaled when open > 0
-   final Condition cuLeft = lock.newCondition();      // signaled when open = 0
+   final Condition bAvail = lock.newCondition();      // barber > 0
+   final Condition chOccupied = lock.newCondition();  // chair > 0
+   final Condition dOpen = lock.newCondition();       // open > 0
+   final Condition cuLeft = lock.newCondition();      // open = 0
 
    int barber = 0,    // inc by barber when he's ready
        chair = 0,     // inc by customer when sitting in chair
        open = 0;      // inc by barber, dec by cust. when leaving
-
 
    // called by customers
    public void getHaircut() { 
       lock.lock();
       ....
    }
-
    // called by the barber
    public void getNextCustomer() {
       lock.lock();
       ...
    }
-    
    // called by the barber
    public void finishedCut() {
       lock.lock();
