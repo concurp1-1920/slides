@@ -173,7 +173,7 @@ public int fetch() {
 
 * You have to use a `Lock` variable in order to construct some condition variables, that's because a `Condition` is <span style="color:red;">always</span> associated with a `Lock`.
 
-* When a `wait()` or `signal()` kind of method is invoked on a `Condition` object, it automatically take care of the `Lock.lock()` and `Lock.unlock()` semantics.
+* When a `await()` or `signal()` kind of method is invoked on a `Condition` object, it automatically take care of the `Lock.lock()` and `Lock.unlock()` semantics.
 
 * A `Condition` associated with a `Lock` is always fair and offer a FIFO semantics.
 
