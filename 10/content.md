@@ -69,8 +69,8 @@ public class Bank {
   }
 
   public synchronized void deposit(int amount) {
-    notifyAll(); // or notify();
     balance += amount;
+    notifyAll(); // or notify();
   }
 
   public synchronized void withdraw(int amount) {
