@@ -184,7 +184,7 @@ class: middle
 
 .center[<img src="img/sleeping_barber.png" width="550">]
 
-Imagine a barber shop with one Barber. The barber has one barber's chair in a cutting room and a waiting room containing a number of chairs in it.
+Imagine a very samll barber shop with one barber. The barber has one barber's chair and a number of waiting chairs in his shop. Because the shop is so small, at most one customer or the barber can move around in it at a time.
 
 When the barber finishes cutting a customer's hair, he dismisses the customer and goes to the waiting room to see if there are others waiting. If there are, he brings one of them back to the chair and cuts their hair. If there are none, he returns to the chair and sleeps in it.
 
