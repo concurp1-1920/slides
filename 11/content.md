@@ -25,7 +25,7 @@ class: middle
   - No memory copy between threads, they share the same address space within a single process.
 
 ---
-### Time usage between `fork` and `pthread_create`
+### Time usage `fork` vs `pthread_create`
 
 <table border="1" cellspacing="0" cellpadding="5" width="100%">
 <tbody><tr>
