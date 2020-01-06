@@ -261,6 +261,19 @@ pthread_cond_broadcast (condition);
 ```
 
 ---
+# Thread exit handler
+
+"Cleanup" routines can be installed that are executed once the thread exits
+
+```c
+void pthread_cleanup_push(exit_routine, arg);
+
+void pthread_cleanup_pop(exec);
+```
+Be aware to always use the push and the pop routine in the same function block!
+
+
+---
 ```c
 #include <pthread.h>
 #include <stdio.h>
