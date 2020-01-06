@@ -277,17 +277,16 @@ Be aware to always use the push and the pop routine in the same function block!
 
 ---
 ```c
+// gcc -Wall -o pthread0 pthread0.c -lpthread
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 #define NUMBER_OF_THREADS 10
 
 // This function prints the thread’s identifier and then exits.
 void *print_hello_world(void *tid) {
   printf("Hello World. Greetings from thread %d\n", tid);
-  pthread_exit(NULL); // <- return value when joining
-}
+  pthread_exit(NULL); // <- return value when joining }
 
 // The main program creates 10 threads and then exits.
 int main(int argc, char *argv[]) {
@@ -295,11 +294,11 @@ int main(int argc, char *argv[]) {
   int status, i;
   for(i=0; i < NUMBER_OF_THREADS; i++) {
     printf("Main here. Creating thread %d\n", i);
-    status = pthread_create(&threads[i], NULL, print_hello_world, (void *)i);
+    status = pthread_create(&threads[i], NULL, 
+      print_hello_world,(void *)i);
     if (status != 0) {
       printf("Oops. Pthread_create returned error code %d\n", status);
-      exit(-1);
-    }
+      exit(-1); }
   }
   exit(NULL);
 }
