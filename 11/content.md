@@ -123,6 +123,8 @@ class: middle
 
 </tr></tbody></table>
 
+The table compares timing results for the fork() subroutine and the pthread_create() subroutine. Timings reflect 50,000 process/thread creations, were performed with the time utility, and units are in seconds, no optimization flags.
+
 ---
 
 ### Memory transfer speed between processes (`MPI`) and threads (`pthread`)
