@@ -298,7 +298,7 @@ int main(int argc, char *argv[]) {
     status = pthread_create(&threads[i], NULL, 
       print_hello_world,(void *)i);
     if (status != 0) {
-      printf("Oops. Pthread_create returned error code %d\n", status);
+      printf("Oops. Pthread_create returned error: %d\n", status);
       exit(-1); }
   }
   exit(0);
