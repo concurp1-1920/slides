@@ -24,7 +24,7 @@ returns true if there are no processes waiting on `c`;
 With wait and signal defined, delayed processes are normally awakened in the order in which they delayed, in other words, in first-in, first-out order.  Some implementations offer a priority wait, where processes are placed in the queue according to some priority.
 
 ```java
-wait(rank,c);
+wait(c,rank);
 ```
 
 where rank is an integer value representing a priority, the lower the value of rank, the higher the priority.
